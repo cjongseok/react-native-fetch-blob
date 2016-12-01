@@ -346,6 +346,12 @@ export default class XMLHttpRequest extends XMLHttpRequestEventTarget{
         break;
         case 'arraybuffer':
           // TODO : to array buffer
+          this._responseText = resp.text()
+          this._response = new Uint8Array(this._responseText.length)
+          for(i = 0; i < this._responseText.length; i++) {
+            this._response[i] = this._responseText.charCodeAt(i)
+          }
+          responseDataReady()
         break
         case 'json':
           this._response = resp.json()
